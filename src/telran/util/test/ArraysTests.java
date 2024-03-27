@@ -26,7 +26,7 @@ String[] stringsMin = {"abc", "lmn", "123", "y"};
 	void bubbleSortTest() {
 		Integer [] expected = {4, 8, 56, 100, 41, 23, -3, -7};
 		Integer [] numbersCopy = java.util.Arrays.copyOf(numbers, numbers.length);
-		// java.util.Arrays полное имя, потому что Arrays текущий класс
+		// java.util.Arrays полное имя, потому что import telran.util.Arrays;
 		Arrays.bubbleSort(numbersCopy, new EvenOddComparator());
 		assertArrayEquals(expected, numbersCopy);
 	}
