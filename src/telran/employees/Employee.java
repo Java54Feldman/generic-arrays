@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class Employee implements Comparable<Employee> {
 	private long id;
-	private int basicSalary;
-	private String department;
+	protected int basicSalary;
+	protected String department;
 	
 	public Employee(long id, int basicSalary, String department) {
 		this.id = id;
@@ -16,12 +16,10 @@ public class Employee implements Comparable<Employee> {
 	public long getId() {
 		return id;
 	}
-
+	
 	@Override
 	public int compareTo(Employee o) {
-		// TODO
-		// comparing according to id
-		return 0;
+		return Long.compare(id, o.getId());
 	}
 
 	@Override

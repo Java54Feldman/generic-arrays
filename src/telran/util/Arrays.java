@@ -45,13 +45,11 @@ public class Arrays {
 		}
 	}
 
-	public static <T> void bubbleSort(T[] array) {
-		//TODO
-		//research: write the code based on the existing one of bubbleSort
-		//бабл сорт без компаратора вызывает бабл сорт с компоратором (найти какой)
-		
+	public static <T extends Comparable<T>> void bubbleSort(T[] array) {
+		// research: write the code based on the existing one of bubbleSort
+		bubbleSort(array, (o1, o2) -> o1.compareTo(o2));
 	}
-	
+
 	private static <T> void swap(T[] array, int i, int j) {
 		T tmp = array[i];
 		array[i] = array[j];
@@ -102,12 +100,27 @@ public class Arrays {
 		return search(array, e -> !predicate.test(e));
 //		return search(array, predicate.negate()); // same
 	}
+
 	public static <T> T[] add(T[] array, T element) {
 		T[] result = java.util.Arrays.copyOf(array, array.length + 1);
-		result[array.length]= element;
+		result[array.length] = element;
 		return result;
 	}
+
 	public static <T> T[] copy(T[] array) {
-		return java.util.Arrays.copyOf(array, array.length); 
+		return java.util.Arrays.copyOf(array, array.length);
+	}
+
+	public static <T> T[] insert(T[] array, int index, T element) {
+		T[] result = java.util.Arrays.copyOf(array, array.length + 1);
+		result[index] = element;
+		System.arraycopy(array, 0, result, 0, index);
+		System.arraycopy(array, index, result, index + 1, array.length - index);
+		return result;
+	}
+
+	public static <T extends Comparable<T>> T[] insertSorted(T[] array, T element) {
+		int index = binarySearch(array, element, (o1, o2) -> o1.compareTo(o2));
+		return index >= 0 ? insert(array, index, element) : insert(array, -index - 1, element);
 	}
 }
