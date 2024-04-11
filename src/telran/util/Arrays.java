@@ -44,10 +44,13 @@ public class Arrays {
 			}
 		}
 	}
-
-	public static <T extends Comparable<T>> void bubbleSort(T[] array) {
+	
+	@SuppressWarnings("unchecked") // убираем желтизну warning
+	public static <T> void bubbleSort(T[] array) {
 		// research: write the code based on the existing one of bubbleSort
-		bubbleSort(array, (o1, o2) -> o1.compareTo(o2));
+		bubbleSort(array, (Comparator<T>)Comparator.naturalOrder());
+//		bubbleSort(array, (a, b) -> ((Comparable<T>)a).compareTo(b));
+//		bubbleSort(array, (a, b) -> a.compareTo(b)); // тогда T extends Comparable<T> в заголовке
 	}
 
 	private static <T> void swap(T[] array, int i, int j) {
@@ -112,6 +115,9 @@ public class Arrays {
 	}
 
 	public static <T> T[] insert(T[] array, int index, T element) {
+		if(index < 0 || index > array.length) {
+			throw new IllegalArgumentException();
+		}
 		T[] result = java.util.Arrays.copyOf(array, array.length + 1);
 		result[index] = element;
 		System.arraycopy(array, 0, result, 0, index);
@@ -119,8 +125,8 @@ public class Arrays {
 		return result;
 	}
 
-	public static <T extends Comparable<T>> T[] insertSorted(T[] array, T element) {
-		int index = binarySearch(array, element, (o1, o2) -> o1.compareTo(o2));
+	public static <T> T[] insertSorted(T[] array, T element, Comparator<T> comp) {
+		int index = binarySearch(array, element, comp);
 		return index >= 0 ? insert(array, index, element) : insert(array, -index - 1, element);
 	}
 }

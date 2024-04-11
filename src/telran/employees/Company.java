@@ -1,5 +1,6 @@
 package telran.employees;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -24,14 +25,16 @@ public class Company implements Iterable {
 		if (getEmployee(empl.getId()) != null) {
 			throw new IllegalStateException("Employee with id " + empl.getId() + " already exists");
 		};
-		employees = Arrays.insertSorted(employees, empl);
+		employees = Arrays.insertSorted(employees, empl, Comparator.naturalOrder());
 	}
 	
 	public Employee getEmployee(long id) {
 		// data about an employee with a given id value
 		// if the company doesn't have such employee, then return null
-		int index = Arrays.binarySearch(employees, new Employee(id, 0, ""),
-				(e1, e2) -> Long.compare(e1.getId(), e2.getId()));
+		int index = Arrays.binarySearch(employees, new Employee(id, 0, null),
+				Comparator.naturalOrder()); // naturalOrder тот порядок, который задал разработчик класса - основанный на Comparable
+//				(a, b) -> a.compareTo(b)); // same
+//				Comparable::compareTo);		//same
 		return index >= 0 ? employees[index] : null;
 	}
 
@@ -39,8 +42,8 @@ public class Company implements Iterable {
 		// removes from the company an employee with a given id
 		// if such employee doesn't exist, throw NoSuchElementException
 		// returns reference to being removed employee
-		int index = Arrays.binarySearch(employees, new Employee(id, 0, ""),
-				(e1, e2) -> Long.compare(e1.getId(), e2.getId()));
+		int index = Arrays.binarySearch(employees, new Employee(id, 0, null),
+				Comparator.naturalOrder());
 		if (index < 0) {
 			throw new NoSuchElementException("Employee with id " + id + " not found");
 		}
@@ -75,7 +78,8 @@ public class Company implements Iterable {
 
 	    @Override
 	    public boolean hasNext() {
-	        return index < employees.length;
+	        return employees != null ? index < employees.length : false;
+	        //in case 
 	    }
 
 	    @Override

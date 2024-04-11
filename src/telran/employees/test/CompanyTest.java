@@ -81,13 +81,13 @@ class CompanyTest {
 	@DisplayName("Test of the Iterator")
 	void testIterator() {
 	    Employee[] expected = {empl2, empl1, empl3};
-	    Iterator<Employee> iterator = company.iterator();
+	    Iterator<Employee> it = company.iterator();
 	    int index = 0;
-	    while (iterator.hasNext()) {
-	        Employee actual = iterator.next();
-	        assertEquals(expected[index++], actual);
+	    while (it.hasNext()) {
+	        assertEquals(expected[index++], it.next());
 	    }
-	    assertThrowsExactly(NoSuchElementException.class, () -> iterator.next());
+	    assertEquals(expected.length, index); // в данном случае эта проверка обязательна
+	    assertThrowsExactly(NoSuchElementException.class, () -> it.next());
 	}
 
 	protected <T> T[] toArrayFromIterable(T[] array, Iterable<T> iterable) {
