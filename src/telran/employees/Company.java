@@ -1,10 +1,8 @@
 package telran.employees;
 
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-import java.util.Set;
 
 import telran.util.Arrays;
 
@@ -35,16 +33,8 @@ public class Company implements Iterable {
 	public Employee getEmployee(long id) {
 		// data about an employee with a given id value
 		// if the company doesn't have such employee, then return null
-		int index = Arrays.binarySearch(employees, new Employee(id, 0, null), Comparator.naturalOrder()); // naturalOrder
-																											// тот
-																											// порядок,
-																											// который
-																											// задал
-																											// разработчик
-																											// класса -
-																											// основанный
-																											// на
-																											// Comparable
+		int index = Arrays.binarySearch(employees, new Employee(id, 0, null), 
+				Comparator.naturalOrder()); // naturalOrder
 //				(a, b) -> a.compareTo(b)); // same
 //				Comparable::compareTo);		//same
 		return index >= 0 ? employees[index] : null;
