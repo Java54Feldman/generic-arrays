@@ -22,6 +22,7 @@ class CompanyTest {
 	private static final long ID3 = 125;
 	private static final int SALARY3 = 3000;
 	private static final String DEPARTMENT2 = "QA";
+	//FIXME there should be at least one object for all classes (WageEmployee, Manager, SalesPerson)
 	Employee empl1 = new Employee(ID1, SALARY1, DEPARTMENT1);
 	Employee empl2 = new Employee(ID2, SALARY2, DEPARTMENT1);
 	Employee empl3 = new Employee(ID3, SALARY3, DEPARTMENT2);
@@ -70,6 +71,7 @@ class CompanyTest {
 	@Test
 	@DisplayName("Test of the method GetDepartmentBudget")
 	void testGetDepartmentBudget() {
+		//FIXME there should be another value for budget's of DEPARTMENT1
 		int budget = company.getDepartmentBudget(DEPARTMENT1);
 		assertEquals(SALARY1 + SALARY2, budget);
 		assertEquals(SALARY3, company.getDepartmentBudget(DEPARTMENT2));
@@ -88,6 +90,11 @@ class CompanyTest {
 	    }
 	    assertEquals(expected.length, index); // в данном случае эта проверка обязательна
 	    assertThrowsExactly(NoSuchElementException.class, () -> it.next());
+	}
+	
+	@Test
+	void testGetDepartments() {
+		//TODO
 	}
 
 	protected <T> T[] toArrayFromIterable(T[] array, Iterable<T> iterable) {

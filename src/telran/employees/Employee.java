@@ -17,6 +17,10 @@ public class Employee implements Comparable<Employee> {
 		return id;
 	}
 	
+	public int computeSalary() {
+		return basicSalary;
+	}
+	
 	@Override
 	public int compareTo(Employee o) {
 		return Long.compare(id, o.getId());

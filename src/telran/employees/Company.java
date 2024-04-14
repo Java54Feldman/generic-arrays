@@ -53,6 +53,8 @@ public class Company implements Iterable {
 	}
 
 	public int getDepartmentBudget(String department) {
+		// FIXME
+		// should be updated
 		// returns sum of basic salary values for all employees of a given department
 		// if employees of a given department don't exist, returns 0
 	    Employee[] departmentEmployees = Arrays.search(employees, e -> e.department.equals(department));
@@ -66,6 +68,14 @@ public class Company implements Iterable {
 	public boolean containsEmployee(Employee employee) {
 	    int index = Arrays.binarySearch(employees, employee, (e1, e2) -> Long.compare(e1.getId(), e2.getId()));
 	    return index >= 0;
+	}
+	
+	public String[] getDepartments() {
+		//TODO
+		//write method returning all departments
+		// не может быть одного служащего в 2 отделах
+		
+		return null;
 	}
 
 	@Override
