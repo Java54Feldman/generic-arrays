@@ -48,7 +48,21 @@ public class Page implements Iterable<Shape>{
 	}
 	@Override
 	public Iterator<Shape> iterator() {
-		// TODO Auto-generated method stub
-		return null;
+		return new PageIterator();
+	}
+	private class PageIterator implements Iterator<Shape> {
+
+		@Override
+		public boolean hasNext() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public Shape next() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		
 	}
 }
