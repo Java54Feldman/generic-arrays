@@ -17,6 +17,10 @@ public class Employee implements Comparable<Employee> {
 		return id;
 	}
 	
+	public String getDepartment() {
+		return department;
+	}
+
 	public int computeSalary() {
 		return basicSalary;
 	}

@@ -72,27 +72,12 @@ public class Company implements Iterable {
 	public String[] getDepartments() {
 		// write method returning all departments
 		// не может быть одного служащего в 2 отделах
-		String[] allDepartments = new String[employees.length];
-		int index = 0;
+		String[] departments = new String[0];
 		for (Employee empl : employees) {
-			allDepartments[index++] = empl.department;
+			if(Arrays.indexOf(departments, empl.getDepartment()) < 0)
+			departments = Arrays.add(departments, empl.getDepartment());
 		}
-		String[] uniqueArray = new String[employees.length];
-		int uniqueCount = 0;
-		for (String element : allDepartments) {
-			boolean isUnique = true;
-			for (int i = 0; (i < uniqueCount && isUnique); i++) {
-				if (uniqueArray[i].equals(element)) {
-					isUnique = false;
-				}
-			}
-			if (isUnique) {
-				uniqueArray[uniqueCount++] = element;
-			}
-		}
-		String[] result = new String[uniqueCount];
-		System.arraycopy(uniqueArray, 0, result, 0, uniqueCount);
-		return result;
+		return departments;
 	}
 
 	@Override

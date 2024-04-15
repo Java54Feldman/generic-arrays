@@ -7,41 +7,38 @@ import telran.util.Arrays;
 
 public class Canvas extends Shape implements Iterable {
 	Shape[] shapes;
-	
+
 	public Canvas(long id) {
 		super(id);
 		shapes = new Shape[0];
 	}
-	
+
 	public Shape[] addShape(Shape shape) {
-		 if (shapes == null) {
-		        shapes = new Shape[] { shape };
-		    } else {
-		        shapes = Arrays.add(shapes, shape);
-		    }
-		 return shapes;
+		shapes = Arrays.add(shapes, shape);
+		return Arrays.copy(shapes);
 	}
+
 	public Shape[] removeShape(long id) {
 		shapes = Arrays.removeIf(this.shapes, e -> e.getId() == id);
-	    return shapes;
+		return Arrays.copy(shapes);
 	}
 
 	@Override
 	public int square() {
-	    int res = 0;
-	    for (Shape shape : shapes) {
-	        res += shape.square();
-	    }
-	    return res;
+		int res = 0;
+		for (Shape shape : shapes) {
+			res += shape.square();
+		}
+		return res;
 	}
 
 	@Override
 	public int perimeter() {
-	    int res = 0;
-	    for (Shape shape : shapes) {
-	        res += shape.perimeter();
-	    }
-	    return res;
+		int res = 0;
+		for (Shape shape : shapes) {
+			res += shape.perimeter();
+		}
+		return res;
 	}
 
 	@Override
@@ -54,7 +51,7 @@ public class Canvas extends Shape implements Iterable {
 
 		@Override
 		public boolean hasNext() {
-			return shapes != null ? index < shapes.length : false;
+			return index < shapes.length;
 		}
 
 		@Override
@@ -65,5 +62,5 @@ public class Canvas extends Shape implements Iterable {
 			return shapes[index++];
 		}
 	}
-	
+
 }

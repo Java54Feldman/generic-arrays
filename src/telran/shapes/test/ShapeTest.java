@@ -2,6 +2,10 @@ package telran.shapes.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import telran.shapes.*;
@@ -56,6 +60,30 @@ class ShapeTest {
 		canvas2.addShape(square2);
 		assertEquals(7*7, canvas2.square());
 		assertEquals((7+7)*2, canvas2.perimeter()); 
+	}
+	
+	@Test
+	@DisplayName("Test of the Iterator")
+	void testIterator() {
+	    Shape[] expected = {rect1, rect2, square1, square2, canvas1, canvas2};
+	    canvas3.addShape(rect1);
+		canvas3.addShape(rect2);
+		canvas3.addShape(square1);
+		canvas3.addShape(square2);
+		
+		canvas1.addShape(rect1);
+		canvas1.addShape(square1);
+		
+		canvas3.addShape(canvas1);
+		canvas3.addShape(canvas2);
+		
+	    Iterator<Canvas> it = canvas3.iterator();
+	    int index = 0;
+	    while (it.hasNext()) {
+	        assertEquals(expected[index++], it.next());
+	    }
+	    assertEquals(expected.length, index); // в данном случае эта проверка обязательна
+	    assertThrowsExactly(NoSuchElementException.class, () -> it.next());
 	}
 
 	protected <T> T[] toArrayFromIterable(T[] array, Iterable<T> iterable) {
