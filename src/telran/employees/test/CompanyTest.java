@@ -116,6 +116,11 @@ class CompanyTest {
 		String[] expected = { "Development", "QA", "Managment", "R&D" };
 		assertArrayEquals(actual, expected);
 	}
+	
+	@Test
+	void testGetManagersWithMostFactor() {
+		//TODO
+	}
 
 	protected <T> T[] toArrayFromIterable(T[] array, Iterable<T> iterable) {
 		int index = 0;

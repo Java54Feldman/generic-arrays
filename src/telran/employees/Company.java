@@ -79,6 +79,11 @@ public class Company implements Iterable {
 		}
 		return departments;
 	}
+	public Manager[] getManagersWithMostFactor() {
+		//TODO
+		//returns array of managers with the most factor value
+		return null;
+	}
 
 	@Override
 	public Iterator iterator() {

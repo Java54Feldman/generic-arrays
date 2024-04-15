@@ -3,22 +3,27 @@ package telran.shapes;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import telran.shapes.exceptions.ShapeAlreadyExistsExeption;
 import telran.util.Arrays;
 
-public class Canvas extends Shape implements Iterable {
-	Shape[] shapes;
+public class Canvas extends Shape implements Iterable<Shape> {
+	protected Shape[] shapes = new Shape[0];
 
 	public Canvas(long id) {
 		super(id);
-		shapes = new Shape[0];
 	}
 
 	public Shape[] addShape(Shape shape) {
+		if(Arrays.indexOf(shapes, shape) > -1) {
+			throw new ShapeAlreadyExistsExeption(shape.getId());
+		}
 		shapes = Arrays.add(shapes, shape);
 		return Arrays.copy(shapes);
 	}
 
 	public Shape[] removeShape(long id) {
+		//FIXME see UML diagram
+		//найти ...
 		shapes = Arrays.removeIf(this.shapes, e -> e.getId() == id);
 		return Arrays.copy(shapes);
 	}
