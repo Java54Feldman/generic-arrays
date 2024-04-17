@@ -37,7 +37,8 @@ class ShapeTest {
 		canvas2.addShape(square2);
 
 		Shape[] expected = { rect1, square1, square2 };
-		Shape[] actual = canvas2.removeShape(rect2.getId());
+		canvas2.removeShape(rect2.getId());
+		Shape[] actual = new Shape[3];
 
 		assertArrayEquals(expected, toArrayFromIterable(actual, canvas2));
 	}

@@ -118,8 +118,19 @@ class CompanyTest {
 	}
 	
 	@Test
+	@DisplayName("Test of the method GetManagersWithMostFacto")
 	void testGetManagersWithMostFactor() {
-		//TODO
+		Manager manager1 = new Manager(1, 1000, "Managment", 1.5f);
+		Manager manager2 = new Manager(2, 1000, "Managment", 1.7f);
+		Manager manager3 = new Manager(3, 1000, "Managment", 1.7f);
+		Manager manager4 = new Manager(4, 1000, "Managment", 1.2f);
+		Company companyTest = new Company(new Employee[] {empl1, manager1, manager2, manager3, manager4, empl4Wage, empl6Sales});
+		Manager[] expected = { manager2, manager3 };
+		assertArrayEquals(expected, companyTest.getManagersWithMostFactor());
+		
+		Company companyNoManager = new Company(new Employee[] {empl1, empl4Wage, empl6Sales});
+		Manager[] expectedEmpty = new Manager[0];
+		assertArrayEquals(expectedEmpty, companyNoManager.getManagersWithMostFactor());
 	}
 
 	protected <T> T[] toArrayFromIterable(T[] array, Iterable<T> iterable) {

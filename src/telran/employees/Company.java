@@ -33,8 +33,7 @@ public class Company implements Iterable {
 	public Employee getEmployee(long id) {
 		// data about an employee with a given id value
 		// if the company doesn't have such employee, then return null
-		int index = Arrays.binarySearch(employees, new Employee(id, 0, null), 
-				Comparator.naturalOrder()); // naturalOrder
+		int index = Arrays.binarySearch(employees, new Employee(id, 0, null), Comparator.naturalOrder()); // naturalOrder
 //				(a, b) -> a.compareTo(b)); // same
 //				Comparable::compareTo);		//same
 		return index >= 0 ? employees[index] : null;
@@ -74,15 +73,33 @@ public class Company implements Iterable {
 		// не может быть одного служащего в 2 отделах
 		String[] departments = new String[0];
 		for (Employee empl : employees) {
-			if(Arrays.indexOf(departments, empl.getDepartment()) < 0)
-			departments = Arrays.add(departments, empl.getDepartment());
+			if (Arrays.indexOf(departments, empl.getDepartment()) < 0)
+				departments = Arrays.add(departments, empl.getDepartment());
 		}
 		return departments;
 	}
+
 	public Manager[] getManagersWithMostFactor() {
-		//TODO
-		//returns array of managers with the most factor value
-		return null;
+		// returns array of managers with the most factor value
+		Manager[] managers = new Manager[0];
+		for (Employee employee : employees) {
+			if (employee instanceof Manager) {
+				managers = Arrays.add(managers, (Manager) employee);
+			}
+		}
+
+		float maxFactor = managers.length > 0 ? managers[0].getFactor() : 0;
+		for (int i = 1; i < managers.length; i++) {
+			if (managers[i].getFactor() > maxFactor)
+				maxFactor = managers[i].getFactor();
+		}
+		float temp = maxFactor;
+
+		Manager[] result = new Manager[0];
+		// почему-то в этом месте компилятор на позволяет в лямбда-выражение подставить
+		// переменную maxFactor, поэтому ввел дополнительную переменную
+		result = Arrays.search(managers, m -> m.getFactor() == temp);
+		return result;
 	}
 
 	@Override

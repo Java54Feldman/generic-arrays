@@ -13,19 +13,15 @@ public class Canvas extends Shape implements Iterable<Shape> {
 		super(id);
 	}
 
-	public Shape[] addShape(Shape shape) {
+	public void addShape(Shape shape) {
 		if(Arrays.indexOf(shapes, shape) > -1) {
 			throw new ShapeAlreadyExistsExeption(shape.getId());
 		}
 		shapes = Arrays.add(shapes, shape);
-		return Arrays.copy(shapes);
 	}
 
-	public Shape[] removeShape(long id) {
-		//FIXME see UML diagram
-		//найти ...
-		shapes = Arrays.removeIf(this.shapes, e -> e.getId() == id);
-		return Arrays.copy(shapes);
+	public void removeShape(long id) {
+		shapes = Arrays.removeIf(shapes, e -> e.getId() == id);
 	}
 
 	@Override
