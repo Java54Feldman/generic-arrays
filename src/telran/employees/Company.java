@@ -81,24 +81,43 @@ public class Company implements Iterable {
 
 	public Manager[] getManagersWithMostFactor() {
 		// returns array of managers with the most factor value
-		Manager[] managers = new Manager[0];
-		for (Employee employee : employees) {
-			if (employee instanceof Manager) {
-				managers = Arrays.add(managers, (Manager) employee);
-			}
-		}
-
-		float maxFactor = managers.length > 0 ? managers[0].getFactor() : 0;
-		for (int i = 1; i < managers.length; i++) {
-			if (managers[i].getFactor() > maxFactor)
-				maxFactor = managers[i].getFactor();
-		}
-		float temp = maxFactor;
+		
+//		my HW		
+//		Manager[] managers = new Manager[0];
+//		for (Employee employee : employees) {
+//			if (employee instanceof Manager) {
+//				managers = Arrays.add(managers, (Manager) employee);
+//			}
+//		}
+//		
+//		float maxFactor = managers.length > 0 ? managers[0].getFactor() : 0;
+//		for (int i = 1; i < managers.length; i++) {
+//			if (managers[i].getFactor() > maxFactor)
+//				maxFactor = managers[i].getFactor();
+//		}
+//		final float temp = maxFactor;
+//		
+//		Manager[] result = new Manager[0];
+//		result = Arrays.search(managers, m -> m.getFactor() == temp);
 
 		Manager[] result = new Manager[0];
-		// почему-то в этом месте компилятор на позволяет в лямбда-выражение подставить
-		// переменную maxFactor, поэтому ввел дополнительную переменную
-		result = Arrays.search(managers, m -> m.getFactor() == temp);
+		float[] maxFactor = {0};
+		for (Employee empl: employees) {
+			if(empl instanceof Manager) {
+				result = updateResult(result, (Manager)empl, maxFactor);
+			}
+		}
+		return result;
+}
+	private Manager[] updateResult(Manager[] managers, Manager manager,
+			float[] maxFactor) {
+		Manager[] result = managers;
+		if(manager.factor == maxFactor[0]) {
+			result = Arrays.add(result, manager);
+		} else if(manager.factor > maxFactor[0]) {
+			result = new Manager[] {manager};
+			maxFactor[0] = manager.factor;
+		}
 		return result;
 	}
 

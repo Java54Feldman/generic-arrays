@@ -118,7 +118,7 @@ class CompanyTest {
 	}
 	
 	@Test
-	@DisplayName("Test of the method GetManagersWithMostFacto")
+	@DisplayName("Test of the method GetManagersWithMostFactor")
 	void testGetManagersWithMostFactor() {
 		Manager manager1 = new Manager(1, 1000, "Managment", 1.5f);
 		Manager manager2 = new Manager(2, 1000, "Managment", 1.7f);

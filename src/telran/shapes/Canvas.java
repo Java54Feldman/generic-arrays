@@ -3,7 +3,7 @@ package telran.shapes;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import telran.shapes.exceptions.ShapeAlreadyExistsExeption;
+import telran.shapes.exceptions.ShapeAlreadyExistsException;
 import telran.util.Arrays;
 
 public class Canvas extends Shape implements Iterable<Shape> {
@@ -15,7 +15,7 @@ public class Canvas extends Shape implements Iterable<Shape> {
 
 	public void addShape(Shape shape) {
 		if(Arrays.indexOf(shapes, shape) > -1) {
-			throw new ShapeAlreadyExistsExeption(shape.getId());
+			throw new ShapeAlreadyExistsException(shape.getId());
 		}
 		shapes = Arrays.add(shapes, shape);
 	}

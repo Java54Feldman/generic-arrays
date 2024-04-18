@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import telran.shapes.exceptions.NoCanvasException;
-import telran.shapes.exceptions.ShapeAlreadyExistsExeption;
+import telran.shapes.exceptions.ShapeAlreadyExistsException;
 import telran.shapes.exceptions.ShapeNotFoundException;
 import telran.util.*;
 
@@ -14,9 +14,14 @@ public class Page implements Iterable<Shape> {
 	private Shape[] shapes = new Shape[0];
 
 	public void addShape(Shape shape) {
-		if (Arrays.indexOf(shapes, shape) > -1) {
-			throw new ShapeAlreadyExistsExeption(shape.getId());
+		for(Shape sh : shapes) {
+			if(sh.getId() == shape.getId()) {
+				throw new ShapeAlreadyExistsException(shape.getId());
+			}
 		}
+//		if (Arrays.indexOf(shapes, shape) > -1) {
+//			throw new ShapeAlreadyExistsException(shape.getId());
+//		}
 		shapes = Arrays.add(shapes, shape);
 	}
 
@@ -46,18 +51,27 @@ public class Page implements Iterable<Shape> {
 
 		return result;
 	}
+	private Shape getShapeById (Shape[] shapes, long id) {
+		for(Shape shape : shapes) {
+			if(shape.getId() == id) {
+				return shape;
+			}
+		}
+		return null;
+	}
 
 	public Shape removeShape(long id) {
-		//здесь поиск работает только если закомментировать в Shape.equals():
-		// 		if (getClass() != obj.getClass())
-		//		return false;
-		// потому что строится для сравнения объект другого класса, отличный от удаляемого
-		int index = Arrays.indexOf(shapes, new Canvas(id));
-		if (index < 0)
-			throw new ShapeNotFoundException(id);
-		Shape shape = shapes[index];
-		shapes = Arrays.removeIf(shapes, s -> s == shape);
-		return shape;
+//		int index = Arrays.indexOf(shapes, new Canvas(id));
+//		if (index < 0)
+//			throw new ShapeNotFoundException(id);
+//		Shape shape = shapes[index];
+//		shapes = Arrays.removeIf(shapes, s -> s == shape);
+//		return shape;
+		Shape removedShape = getShapeById(shapes, id);
+		if(removedShape != null) {
+			shapes = Arrays.removeIf(shapes, s -> s.getId() == id );
+		}
+		return removedShape;
 	}
 
 	public Shape removeShape(Long[] canvasIds, long id) {

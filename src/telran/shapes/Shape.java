@@ -20,14 +20,22 @@ public abstract class Shape {
 	}
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
+		boolean res = false;
+		if(obj != null && obj instanceof Shape) {
+			res = id == ((Shape)obj).id;
+		}
+		return res;
+		
+//		if (this == obj)
+//			return true;
+//		if (obj == null)
+//			return false;
 //		if (getClass() != obj.getClass())
 //			return false;
-		Shape other = (Shape) obj;
-		return id == other.id;
+////		if(!(obj instanceof Shape)) 
+////		return false;
+//		Shape other = (Shape) obj;
+//		return id == other.id;
 	}
 		
 }

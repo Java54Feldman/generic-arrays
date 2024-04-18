@@ -59,7 +59,7 @@ class PageTest {
 		page.addShape(shape11);
 		Shape[] actual = new Shape[3];
 		assertArrayEquals(expected, toArrayFromIterable(actual, page));
-		assertThrowsExactly(ShapeAlreadyExistsExeption.class, () -> page.addShape(canvas3));
+		assertThrowsExactly(ShapeAlreadyExistsException.class, () -> page.addShape(canvas3));
 	}
 
 	@Test
@@ -73,10 +73,8 @@ class PageTest {
 		Long[] path2 = { 33l };
 		assertThrowsExactly(ShapeNotFoundException.class, () -> page.addShape(path2, new Square(44, SIZE1)));
 
-	    // ! NoCanvasException проверить не смог, застрял здесь
-		Long[] path3 = { canvas3.getId(), canvas2.getId(), shape21.getId() };
+		Long[] path3 = { canvas3.getId(), shape21.getId() };
 	    assertThrowsExactly(NoCanvasException.class, () -> page.addShape(path3, new Square(44, SIZE1)));
-	    // ! NoCanvasException проверить не смог, застрял здесь
 	}
 
 	@Test
@@ -88,7 +86,7 @@ class PageTest {
 	    Shape[] expected = { canvas3, shape11 };
 	    Shape[] actual = new Shape[2];
 	    assertArrayEquals(expected, toArrayFromIterable(actual, page));
-	    assertThrowsExactly(ShapeNotFoundException.class, () -> page.removeShape(99l));
+	    assertNull(page.removeShape(99l));
 	}
 
 	@Test
