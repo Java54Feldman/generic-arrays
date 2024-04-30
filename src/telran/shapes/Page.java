@@ -14,14 +14,9 @@ public class Page implements Iterable<Shape> {
 	private Shape[] shapes = new Shape[0];
 
 	public void addShape(Shape shape) {
-		for(Shape sh : shapes) {
-			if(sh.getId() == shape.getId()) {
-				throw new ShapeAlreadyExistsException(shape.getId());
-			}
+		if (Arrays.indexOf(shapes, shape) > -1) {
+			throw new ShapeAlreadyExistsException(shape.getId());
 		}
-//		if (Arrays.indexOf(shapes, shape) > -1) {
-//			throw new ShapeAlreadyExistsException(shape.getId());
-//		}
 		shapes = Arrays.add(shapes, shape);
 	}
 
@@ -52,21 +47,16 @@ public class Page implements Iterable<Shape> {
 		return result;
 	}
 	private Shape getShapeById (Shape[] shapes, long id) {
+		Shape res = null;
 		for(Shape shape : shapes) {
 			if(shape.getId() == id) {
-				return shape;
+				res = shape;
 			}
 		}
-		return null;
+		return res;
 	}
 
 	public Shape removeShape(long id) {
-//		int index = Arrays.indexOf(shapes, new Canvas(id));
-//		if (index < 0)
-//			throw new ShapeNotFoundException(id);
-//		Shape shape = shapes[index];
-//		shapes = Arrays.removeIf(shapes, s -> s == shape);
-//		return shape;
 		Shape removedShape = getShapeById(shapes, id);
 		if(removedShape != null) {
 			shapes = Arrays.removeIf(shapes, s -> s.getId() == id );
